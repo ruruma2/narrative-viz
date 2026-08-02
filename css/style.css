@@ -1,0 +1,460 @@
+/* ==========================================================================
+   The narrow recession
+   Visual identity: a statistical plate. Cool bone ground, ruled plotting grid,
+   oxide red reserved for loss and pine teal reserved for gain. Colour is never
+   decorative in this design: if something is red it lost jobs, if something is
+   teal it gained them, and amber only ever marks an annotation.
+   ========================================================================== */
+
+:root {
+  --paper:      #E9EAE5;
+  --panel:      #F5F6F2;
+  --rule:       #D2D5CC;
+  --rule-fine:  #DFE1DA;
+  --ink:        #161A15;
+  --ink-2:      #4C5348;
+  --ink-3:      #7C8377;
+  --muted:      #B6BAAF;
+
+  --loss:       #8C2F1E;
+  --loss-2:     #B4593C;
+  --gain:       #1F6F6B;
+  --gain-2:     #4E9993;
+  --signal:     #C07C08;
+
+  --ramp-0: #F1EDE4;
+  --ramp-1: #E4CFBD;
+  --ramp-2: #D3AB91;
+  --ramp-3: #C08468;
+  --ramp-4: #A55A41;
+  --ramp-5: #8C2F1E;
+
+  --display: "Bricolage Grotesque", "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --gap: 28px;
+  --radius: 3px;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  background-color: var(--paper);
+  /* The ruled ground: a fine plotting grid that runs behind the whole page. */
+  background-image:
+    linear-gradient(to right, var(--rule-fine) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--rule-fine) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--ink); color: var(--panel);
+  padding: 10px 16px; z-index: 50; font-family: var(--mono); font-size: 12px;
+}
+.skip-link:focus { left: 8px; top: 8px; }
+
+.shell {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 48px 32px 64px;
+}
+
+/* ------------------------------ masthead ------------------------------ */
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 18px;
+}
+
+.masthead {
+  border-top: 3px solid var(--ink);
+  padding-top: 18px;
+  max-width: 1000px;
+}
+
+.masthead h1 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(44px, 7.2vw, 92px);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  margin: 0 0 20px;
+}
+
+.standfirst {
+  font-size: clamp(17px, 1.5vw, 20px);
+  line-height: 1.5;
+  max-width: 62ch;
+  margin: 0 0 14px;
+  color: var(--ink);
+}
+
+.byline {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0;
+}
+
+/* ------------------------------ stepper ------------------------------ */
+
+.stepper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin: 40px 0 var(--gap);
+}
+
+.step {
+  appearance: none;
+  border: 0;
+  background: var(--panel);
+  text-align: left;
+  padding: 14px 16px 16px;
+  cursor: pointer;
+  font-family: var(--body);
+  color: var(--ink-2);
+  transition: background 140ms ease, color 140ms ease;
+  display: block;
+}
+.step:hover { background: #FFFFFF; color: var(--ink); }
+.step:focus-visible { outline: 2px solid var(--signal); outline-offset: -2px; }
+
+.step .step-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+  display: block;
+  margin-bottom: 4px;
+}
+.step .step-name {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  display: block;
+}
+
+.step.is-current { background: var(--ink); color: var(--panel); }
+.step.is-current .step-num { color: var(--signal); }
+.step.is-visited:not(.is-current) .step-num { color: var(--ink-2); }
+
+/* ------------------------------ stage ------------------------------ */
+
+.stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: var(--gap);
+  align-items: start;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  padding: 24px 26px 20px;
+  min-width: 0;
+}
+
+.scene-head {
+  display: flex;
+  gap: 18px;
+  align-items: baseline;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 16px;
+  margin-bottom: 18px;
+}
+
+.scene-num {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--signal);
+  padding-top: 6px;
+}
+
+.scene-head h2 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(24px, 2.6vw, 34px);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  margin: 0 0 6px;
+}
+
+.dek {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 15.5px;
+  max-width: 68ch;
+}
+
+.figure { margin: 0; }
+
+.figure-frame {
+  border: 1px solid var(--rule);
+  background: #FBFBF8;
+  /* the plotting grid inside the plate */
+  background-image:
+    linear-gradient(to right, var(--rule-fine) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--rule-fine) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+#chart { display: block; width: 100%; height: auto; }
+
+.figure-note {
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
+  padding-top: 12px;
+  max-width: 90ch;
+}
+
+/* ------------------------------ rail ------------------------------ */
+
+.rail { position: sticky; top: 24px; display: flex; flex-direction: column; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+
+.rail-block { background: var(--panel); padding: 18px 20px 20px; }
+
+.rail-label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 10px;
+}
+
+.rail-prose p { margin: 0 0 12px; font-size: 15px; line-height: 1.5; }
+.rail-prose p:last-child { margin-bottom: 0; }
+.rail-prose strong { font-weight: 600; }
+.rail-prose .num { font-family: var(--mono); font-weight: 600; font-size: 0.94em; }
+
+/* controls */
+
+.controls { display: flex; flex-direction: column; gap: 16px; }
+
+.control-label {
+  font-size: 13px;
+  color: var(--ink-2);
+  margin: 0 0 8px;
+  display: block;
+}
+
+.toggle { display: flex; border: 1px solid var(--ink); }
+.toggle button {
+  flex: 1;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 9px 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  cursor: pointer;
+}
+.toggle button + button { border-left: 1px solid var(--ink); }
+.toggle button.is-on { background: var(--ink); color: var(--panel); }
+.toggle button:focus-visible { outline: 2px solid var(--signal); outline-offset: -2px; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  appearance: none;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  padding: 5px 8px 5px 6px;
+  background: #FFFFFF;
+  border: 1px solid var(--rule);
+  color: var(--ink-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1.2;
+}
+.chip:hover { border-color: var(--ink-3); color: var(--ink); }
+.chip.is-on { background: var(--ink); border-color: var(--ink); color: var(--panel); }
+.chip:focus-visible { outline: 2px solid var(--signal); outline-offset: 1px; }
+.chip .swatch { width: 9px; height: 9px; flex: 0 0 9px; border-radius: 50%; }
+
+.slider-row { display: flex; align-items: center; gap: 12px; }
+input[type="range"] { flex: 1; accent-color: var(--loss); }
+.slider-value { font-family: var(--mono); font-size: 15px; font-weight: 600; min-width: 52px; text-align: right; }
+
+.btn {
+  appearance: none;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 11px 14px;
+  border: 1px solid var(--ink);
+}
+.btn-solid { background: var(--ink); color: var(--panel); }
+.btn-ghost { background: transparent; color: var(--ink); }
+.btn:disabled { opacity: 0.32; cursor: not-allowed; }
+.btn:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+.btn-follow { width: 100%; background: var(--signal); border-color: var(--signal); color: #241A02; }
+
+.rail-nav { background: var(--panel); padding: 16px 20px 18px; display: grid; grid-template-columns: auto 1fr; gap: 10px; }
+
+.readout { font-size: 14px; }
+.readout-hint { color: var(--ink-3); font-size: 13px; margin: 0; font-style: italic; }
+.readout dl { margin: 0; display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; }
+.readout dt { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); align-self: center; }
+.readout dd { margin: 0; font-family: var(--mono); font-size: 14px; font-weight: 600; text-align: right; }
+.readout .val-loss { color: var(--loss); }
+.readout .val-gain { color: var(--gain); }
+.readout .readout-title { font-family: var(--display); font-weight: 600; font-size: 17px; letter-spacing: -0.015em; margin: 0 0 10px; line-height: 1.15; }
+
+/* ------------------------------ svg text ------------------------------ */
+
+.axis-label, .tick text {
+  font-family: var(--mono);
+  font-size: 11px;
+  fill: var(--ink-3);
+  letter-spacing: 0.02em;
+}
+.axis path, .axis line { stroke: var(--rule); shape-rendering: crispEdges; }
+.axis-title {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  fill: var(--ink-3);
+}
+.gridline { stroke: var(--rule-fine); shape-rendering: crispEdges; }
+.zero-line { stroke: var(--ink); stroke-width: 1; shape-rendering: crispEdges; }
+.reference-line { stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 2 4; }
+.recession-band { fill: var(--ink); opacity: 0.055; }
+.recession-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; fill: var(--ink-3); }
+
+.series-line { fill: none; stroke: var(--ink); stroke-width: 2.25; stroke-linejoin: round; stroke-linecap: round; }
+
+.value-label { font-family: var(--mono); font-size: 11px; font-weight: 600; }
+.cat-label { font-family: var(--body); font-size: 12.5px; fill: var(--ink); }
+
+/* the measuring rule: this project's signature device */
+.rule-line { stroke: var(--signal); stroke-width: 1.5; }
+.rule-tick { stroke: var(--signal); stroke-width: 1.5; }
+.rule-text { font-family: var(--mono); font-size: 11.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; fill: #5C3B02; }
+.rule-text-bg { fill: #FBFBF8; }
+
+/* annotations: one template for every scene */
+.nv-annotation .annotation-note-title {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  fill: var(--signal);
+}
+.nv-annotation .annotation-note-label {
+  font-family: var(--body);
+  font-size: 12.5px;
+  fill: var(--ink);
+}
+.nv-annotation .connector, .nv-annotation .subject { stroke: var(--ink); stroke-width: 1.25; }
+.nv-annotation .connector-end { fill: var(--ink); stroke: var(--ink); }
+.nv-annotation .annotation-note-bg { fill: #FBFBF8; fill-opacity: 0.94; }
+.nv-annotation .annotation-subject .subject { fill: none; }
+
+.hover-guide { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 2 3; pointer-events: none; }
+.hover-dot { fill: var(--panel); stroke: var(--ink); stroke-width: 2; pointer-events: none; }
+
+.county { stroke: none; }
+.county.is-dim { opacity: 0.22; }
+.county.is-hit { stroke: var(--ink); stroke-width: 0.4; }
+.county.no-data { fill: url(#nodata); }
+.state-mesh { fill: none; stroke: #FBFBF8; stroke-width: 0.7; stroke-linejoin: round; pointer-events: none; }
+.nation-outline { fill: none; stroke: var(--ink-3); stroke-width: 0.9; pointer-events: none; }
+.county-hover { fill: none; stroke: var(--ink); stroke-width: 1.8; pointer-events: none; }
+
+.legend-title { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; fill: var(--ink-3); }
+.legend-tick { font-family: var(--mono); font-size: 10px; fill: var(--ink-3); }
+
+.end-label { font-family: var(--mono); font-size: 11px; font-weight: 500; }
+.sector-line { fill: none; stroke-width: 1.6; stroke-linejoin: round; }
+.sector-line.is-dim { stroke: var(--muted); stroke-width: 1; }
+.sector-line.is-focus { stroke-width: 3; }
+.bar { cursor: pointer; }
+.bar-hit { fill: transparent; cursor: pointer; }
+.bar.is-selected { stroke: var(--ink); stroke-width: 1.5; }
+
+/* ------------------------------ tooltip ------------------------------ */
+
+.tooltip {
+  position: fixed;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 90ms ease;
+  background: var(--ink);
+  color: var(--panel);
+  padding: 9px 12px;
+  max-width: 260px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  z-index: 40;
+}
+.tooltip.is-on { opacity: 1; }
+.tooltip .tt-title { font-family: var(--display); font-weight: 600; font-size: 14px; letter-spacing: -0.01em; display: block; margin-bottom: 3px; }
+.tooltip .tt-row { font-family: var(--mono); font-size: 11.5px; display: flex; justify-content: space-between; gap: 14px; }
+.tooltip .tt-row span:last-child { font-weight: 600; }
+.tooltip .tt-note { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.6; display: block; margin-top: 5px; }
+
+/* ------------------------------ colophon ------------------------------ */
+
+.colophon {
+  margin-top: 40px;
+  border-top: 1px solid var(--rule);
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--gap);
+}
+.colophon p { font-size: 12.5px; line-height: 1.55; color: var(--ink-2); margin: 0; max-width: 72ch; }
+
+/* ------------------------------ responsive ------------------------------ */
+
+@media (max-width: 1080px) {
+  .stage { grid-template-columns: minmax(0, 1fr); }
+  .rail { position: static; }
+  .colophon { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  .shell { padding: 28px 16px 48px; }
+  .stepper { grid-template-columns: repeat(2, 1fr); }
+  .panel { padding: 16px 14px 14px; }
+  .scene-head { gap: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}

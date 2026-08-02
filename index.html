@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Narrow Recession | A narrative visualization of U.S. payroll employment, 2006 to 2015</title>
+<meta name="description" content="A four scene narrative visualization built with D3 showing that the 2008 recession's job losses were concentrated in a few industries and a few places, and that the recovery went somewhere else." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<a class="skip-link" href="#stage">Skip to the visualization</a>
+
+<div class="shell">
+
+  <header class="masthead">
+    <p class="eyebrow">U.S. Bureau of Labor Statistics &nbsp;/&nbsp; Current Employment Statistics &nbsp;/&nbsp; Local Area Unemployment Statistics</p>
+    <h1>The narrow recession</h1>
+    <p class="standfirst">
+      Between January 2008 and February 2010 the United States shed 8.7 million payroll jobs. The headline
+      number reads like a flood that touched everything. It was closer to a sinkhole. Two industries took
+      nearly half the losses, one industry never had a down month at all, and the places that fell hardest
+      were the places that made things and built things.
+    </p>
+    <p class="byline">A narrative visualization in four scenes. Built with D3, d3-annotation and TopoJSON.</p>
+  </header>
+
+  <nav class="stepper" id="stepper" aria-label="Scene navigation"></nav>
+
+  <main class="stage" id="stage">
+
+    <section class="panel" aria-live="polite">
+      <div class="scene-head">
+        <span class="scene-num" id="scene-num">01</span>
+        <div>
+          <h2 id="scene-title">Loading</h2>
+          <p class="dek" id="scene-dek">Reading the payroll series.</p>
+        </div>
+      </div>
+
+      <figure class="figure">
+        <div class="figure-frame">
+          <svg id="chart" role="img" aria-labelledby="scene-title"></svg>
+        </div>
+        <figcaption class="figure-note" id="figure-note"></figcaption>
+      </figure>
+    </section>
+
+    <aside class="rail">
+      <div class="rail-block">
+        <p class="rail-label">Read this scene</p>
+        <div class="rail-prose" id="rail-prose"></div>
+      </div>
+
+      <div class="rail-block" id="controls-block">
+        <p class="rail-label">Controls</p>
+        <div class="controls" id="controls"></div>
+      </div>
+
+      <div class="rail-block">
+        <p class="rail-label">Readout</p>
+        <div class="readout" id="readout">
+          <p class="readout-hint">Hover the chart to inspect any point.</p>
+        </div>
+      </div>
+
+      <div class="rail-nav">
+        <button class="btn btn-ghost" id="btn-prev" type="button">Back</button>
+        <button class="btn btn-solid" id="btn-next" type="button">Next scene</button>
+      </div>
+    </aside>
+
+  </main>
+
+  <footer class="colophon">
+    <div>
+      <p class="rail-label">Sources</p>
+      <p>
+        Payroll employment by supersector, seasonally adjusted, monthly, January 2006 to December 2015:
+        U.S. Bureau of Labor Statistics, Current Employment Statistics.
+        County unemployment rates, at levels generally consistent with 2009:
+        U.S. Bureau of Labor Statistics, Local Area Unemployment Statistics.
+        Both distributed through the vega-datasets collection. County boundaries from the TopoJSON US Atlas,
+        derived from U.S. Census Bureau cartographic boundary files.
+        BLS cannot vouch for analyses derived from its data after retrieval.
+      </p>
+    </div>
+    <div>
+      <p class="rail-label">Built with</p>
+      <p>D3 v7, d3-annotation 2.5.1 and topojson-client 3.1.0, all served from this repository. No other
+      visualization library is used. Recession shading follows the NBER peak of December 2007 and trough of
+      June 2009.</p>
+    </div>
+  </footer>
+
+</div>
+
+<div class="tooltip" id="tooltip" role="status" aria-live="off"></div>
+
+<script src="lib/d3.v7.min.js"></script>
+<script src="lib/d3-annotation.min.js"></script>
+<script src="lib/topojson-client.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/data.js"></script>
+<script src="js/util.js"></script>
+<script src="js/annotations.js"></script>
+<script src="js/scene1.js"></script>
+<script src="js/scene2.js"></script>
+<script src="js/scene3.js"></script>
+<script src="js/scene4.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
